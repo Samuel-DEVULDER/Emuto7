@@ -1,0 +1,4 @@
+delete #?.o
+delete to770#?
+smake
+copy to770 /

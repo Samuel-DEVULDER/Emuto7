@@ -1,0 +1,43 @@
+#
+# Makefile pour l'emulateur TO7/70 - SAS/C version
+#
+# Adapte pour l'Amiga par Samuel Devulder en 07/97.
+#
+
+obj=monitor.o d6809.o emuto7.o video_ami.o emup1.o emup2.o emup3.o copyto7.o repert.o amiga68k.o
+
+CFLAGS=OPT PARM=R DEF direct=dirent
+CC=sc
+
+to770: $(obj)
+        $(CC) $(CFLAGS) LINK TO to770 $(obj)
+
+monitor.o: monitor.c monitor.h repert.h
+        $(CC) $(CFLAGS) NOLINK monitor.c
+
+d6809.o: d6809.c monitor.h
+        $(CC) $(CFLAGS) NOLINK d6809.c
+
+emuto7.o: emuto7.c monitor.h emuto7.h video.h
+        $(CC) $(CFLAGS) NOLINK emuto7.c
+
+amiga68k.o:
+        $(CC) $(CFLAGS) NOLINK amiga68k.a
+
+video_ami.o: video_ami.c monitor.h emuto7.h video.h
+        $(CC) $(CFLAGS) NOLINK video_ami.c
+
+emup1.o: emup1.c monitor.h emuto7.h video.h
+        $(CC) $(CFLAGS) NOLINK emup1.c
+
+emup2.o: emup2.c monitor.h emuto7.h
+        $(CC) $(CFLAGS) NOLINK emup2.c
+
+emup3.o: emup3.c monitor.h emuto7.h
+        $(CC) $(CFLAGS) NOLINK emup3.c
+
+copyto7.o: copyto7.c monitor.h
+        $(CC) $(CFLAGS) NOLINK copyto7.c
+
+repert.o: repert.c config.h
+        $(CC) $(CFLAGS) NOLINK repert.c

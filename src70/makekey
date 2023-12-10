@@ -1,0 +1,1 @@
+gcc -o enterkey enterkey.c -I/usr/local/X11/include/ -L/usr/local/X11/lib -lX11
